@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!-- 只装 launch 的纯 ament_cmake 包；运行时依赖 slam_toolbox（建图）、nav2 全套（导航）、map_server（保存地图用） -->
+<package format="3">
+
+    <name>edgerover_navigation</name>
+
+    <version>0.1.0</version>
+
+    <description>EdgeRover SLAM / Nav2 launch files</description>
+
+    <maintainer email="lyfan@todo.todo">lyfan</maintainer>
+
+    <license>Apache-2.0</license>
+
+    <buildtool_depend>ament_cmake</buildtool_depend>
+
+    <exec_depend>launch_ros</exec_depend>
+
+    <exec_depend>slam_toolbox</exec_depend>
+
+    <exec_depend>nav2_map_server</exec_depend>
+
+    <!-- 导航：include nav2_bringup 的 bringup_launch.py；下面按参数文件里实际用到的插件列出 -->
+    <exec_depend>nav2_bringup</exec_depend>
+
+    <exec_depend>nav2_amcl</exec_depend>
+
+    <exec_depend>nav2_controller</exec_depend>
+
+    <exec_depend>nav2_costmap_2d</exec_depend>
+
+    <exec_depend>nav2_planner</exec_depend>
+
+    <exec_depend>nav2_navfn_planner</exec_depend>
+
+    <exec_depend>nav2_smoother</exec_depend>
+
+    <exec_depend>nav2_behaviors</exec_depend>
+
+    <exec_depend>nav2_bt_navigator</exec_depend>
+
+    <exec_depend>nav2_waypoint_follower</exec_depend>
+
+    <exec_depend>nav2_velocity_smoother</exec_depend>
+
+    <exec_depend>nav2_lifecycle_manager</exec_depend>
+
+    <exec_depend>dwb_core</exec_depend>
+
+    <exec_depend>dwb_plugins</exec_depend>
+    
+    <export><build_type>ament_cmake</build_type></export>
+
+</package>

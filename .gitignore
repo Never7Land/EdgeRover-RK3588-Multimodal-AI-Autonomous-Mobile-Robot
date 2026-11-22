@@ -1,0 +1,11 @@
+# colcon 构建产物：体积大且与平台相关
+ros2_workspace/build/
+ros2_workspace/install/
+ros2_workspace/log/
+# 3.1 GB 模型权重，不入库，README 里说明获取方式
+model/
+# 单张位姿图 3.4 MB 的二进制
+maps/*.posegraph
+.vscode/
+__pycache__/
+*.pyc

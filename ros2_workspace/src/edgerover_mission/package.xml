@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>edgerover_mission</name>
+  <version>0.1.0</version>
+  <description>寻物-接近-描述任务节点：YOLO 检测 + 激光测距 + VLM 问答</description>
+  <maintainer email="lyfan@todo.todo">lyfan</maintainer>
+  <license>MIT</license>
+
+  <!-- ament_cmake（C++ 包） -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- edgerover_ros_bridge 提供 VlmAsk 服务定义，编译和运行都需要 -->
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>vision_msgs</depend>
+  <depend>edgerover_ros_bridge</depend>
+
+  <export><build_type>ament_cmake</build_type></export>
+</package>

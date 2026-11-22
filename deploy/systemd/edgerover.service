@@ -1,0 +1,21 @@
+[Unit]
+Description=EdgeRover supervisor (camera -> yolo -> vlm)
+After=network.target
+
+[Service]
+Type=simple
+User=lyfan
+Group=lyfan
+SupplementaryGroups=video render
+# source 一下 install 环境，保证 edgerover_ipc 等库能被找到；exec 让 supervisor 成为主进程
+ExecStart=/bin/bash -c 'source $HOME/edge_rover/ros2_workspace/install/setup.bash && exec $HOME/edge_rover/ros2_workspace/install/edgerover_supervisor/lib/edgerover_supervisor/supervisor'
+# 停止时只给 supervisor 发 SIGTERM，由它按 vlm -> yolo -> camera 顺序收尾；超时后才对残留进程 SIGKILL
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=30
+# supervisor 自己崩了由 systemd 拉起；正常 stop 时它返回 0，不会被重启
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

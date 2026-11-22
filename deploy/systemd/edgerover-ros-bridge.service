@@ -1,0 +1,20 @@
+[Unit]
+Description=EdgeRover ROS2 bridge
+After=edgerover.service network-online.target
+Wants=edgerover.service network-online.target
+
+[Service]
+Type=simple
+User=lyfan
+Environment=PYTHONUNBUFFERED=1
+    Environment=RCUTILS_COLORIZED_OUTPUT=0
+    # 如果平时设置了 ROS_DOMAIN_ID，这里也要设成同一个值，否则 SSH 里的 ros2 命令看不到话题
+    # Environment=ROS_DOMAIN_ID=0
+    ExecStart=/bin/bash -c 'source /opt/ros/humble/setup.bash && source /home/lyfan/edge_rover/ros2_workspace/install/setup.bash && exec ros2 launch edgerover_ros_bridge bridge.launch.py'
+    KillSignal=SIGINT
+TimeoutStopSec=10
+    Restart=on-failure
+RestartSec=3
+
+    [Install]
+WantedBy=multi-user.target

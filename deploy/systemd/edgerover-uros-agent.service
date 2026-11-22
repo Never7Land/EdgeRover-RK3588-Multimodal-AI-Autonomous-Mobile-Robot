@@ -1,0 +1,32 @@
+# EdgeRover 底盘网关：ESP32 经 Wi-Fi UDP 8888 接入 ROS2，提供 /odom、/scan 等话题
+[Unit]
+Description=EdgeRover micro-ROS agent (chassis ESP32, UDP 8888)
+# 等网络就绪再启动，避免开机早期网卡未起时启动
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# 与 ros-bridge 服务同一用户，ROS2 日志写到 /home/lyfan/.ros
+User=lyfan
+
+# 与 edgerover-ros-bridge.service 保持一致：Python 输出不缓冲，journal 里能实时看到 launch 日志
+Environment=PYTHONUNBUFFERED=1
+
+# 关闭彩色输出，避免 journal 中出现 ANSI 颜色控制符
+Environment=RCUTILS_COLORIZED_OUTPUT=0
+
+# systemd 不读 .bashrc，必须显式 source ROS 环境和工作空间；exec 让 agent 直接成为主进程，便于 systemd 管理和停止
+ExecStart=/bin/bash -c 'source /opt/ros/humble/setup.bash && source /home/lyfan/edge_rover/ros2_workspace/install/setup.bash && exec ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888 -v4'
+
+# agent 无论因何退出都在 2 s 后重启
+Restart=always
+RestartSec=2
+
+# 用 SIGINT 停止，与手动 Ctrl-C 行为一致，退出更干净
+KillSignal=SIGINT
+TimeoutStopSec=10
+
+[Install]
+# 普通多用户启动目标，开机即启
+WantedBy=multi-user.target

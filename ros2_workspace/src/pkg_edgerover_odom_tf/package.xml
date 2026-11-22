@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>pkg_edgerover_odom_tf</name>
+  <version>0.1.0</version>
+  <description>Broadcast odom-&gt;base_link TF from the chassis /odom topic</description>
+  <maintainer email="lyfan@todo.todo">lyfan</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>nav_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>tf2_ros</depend>
+
+  <exec_depend>launch_ros</exec_depend>
+  <!-- tf_bringup.launch.py 运行时需要：URDF 静态 TF 节点、关节状态节点、提供 chuyun.urdf 的描述包 -->
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>chuyun_description</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

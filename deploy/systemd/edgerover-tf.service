@@ -1,0 +1,38 @@
+# Linux systemd 服务配置文件（.service）
+
+# RK3588 开机后自动启动 ROS2 的 TF 坐标变换系统，并由 systemd 负责管理它的运行、停止和异常重启
+
+# 这个服务主要负责建立机器人坐标系之间的关系
+
+# EdgeRover TF 树：odom→base_footprint（odom_tf）+ URDF 静态/车轮 TF；不可与 chuyun_bringup.launch.py 同时运行
+
+[Unit]
+Description=EdgeRover TF tree (odom_tf + robot_state_publisher + joint_state_publisher)
+
+# 在网关之后启动；用 Wants 而非 Requires，网关重启时不会连带停掉 TF
+After=network-online.target edgerover-uros-agent.service
+Wants=network-online.target edgerover-uros-agent.service
+
+[Service]
+Type=simple
+User=lyfan
+# 与 edgerover-ros-bridge.service 保持一致：Python 输出不缓冲，journal 里能实时看到 launch 日志
+Environment=PYTHONUNBUFFERED=1
+
+# 关闭彩色输出，避免 journal 中出现 ANSI 颜色控制符
+Environment=RCUTILS_COLORIZED_OUTPUT=0
+
+# 加载 ROS2 Humble 环境 + 加载 EdgeRover 工作空间 + 启动 TF 系统
+# 显式 source 环境；节点崩溃由 launch 里的 respawn 处理，整个 launch 退出才由 systemd 重启
+ExecStart=/bin/bash -c 'source /opt/ros/humble/setup.bash && source /home/lyfan/edge_rover/ros2_workspace/install/setup.bash && exec ros2 launch pkg_edgerover_odom_tf tf_bringup.launch.py'
+
+# launch 异常退出时 2 s 后重启；正常 stop 不重启
+Restart=on-failure
+RestartSec=2
+
+# ros2 launch 收到 SIGINT 会依次关闭子节点
+KillSignal=SIGINT
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>edgerover_supervisor</name>
+  <version>0.1.0</version>
+  <description>Process supervisor: launch, heartbeat check, auto restart for camera/yolo/vlm</description>
+  <maintainer email="lyfan@example.com">lyfan</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>edgerover_ipc</depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

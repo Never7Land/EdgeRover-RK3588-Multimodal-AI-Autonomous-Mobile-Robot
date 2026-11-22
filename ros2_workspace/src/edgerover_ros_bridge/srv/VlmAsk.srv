@@ -1,0 +1,13 @@
+# request
+string  question
+float32 timeout_s      # <=0 用参数 vlm_timeout_s
+---
+# response
+bool    success
+string  answer
+string  error          # 超时 / ERR 原因
+int64   frame_id       # VLM 实际用的帧
+float32 frame_age_ms
+float32 vlm_total_ms   # VLM 自报的总耗时
+float32 rtt_ms         # 桥这边测的往返耗时
+string  header         # VLM 回复的第一行原文

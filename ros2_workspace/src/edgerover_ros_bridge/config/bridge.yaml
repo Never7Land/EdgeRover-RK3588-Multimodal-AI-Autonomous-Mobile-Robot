@@ -1,0 +1,14 @@
+/**:
+  ros__parameters:
+    det_endpoint: "ipc:///tmp/edgerover_det"
+    state_endpoint: "ipc:///tmp/edgerover_state"
+    vlm_endpoint: "ipc:///tmp/edgerover_vlm"
+    vlm_timeout_s: 30.0
+    vlm_busy_max_s: 60.0
+    frame_id: "camera_link"
+    det_coords: "letterbox"
+    letterbox_size: 640
+    publish_image: true
+    image_rate_hz: 5.0
+    shm_name: "/edgerover_frames"
+    stats_rate_hz: 1.0

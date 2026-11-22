@@ -1,0 +1,17 @@
+<?xml version="1.0"?> <!-- XML 文件版本 -->
+<package format="3"> <!-- ROS2 功能包描述文件，使用格式 3 -->
+
+  <name>edgerover_ipc</name> <!-- 功能包名称 -->
+  <version>0.1.0</version> <!-- 功能包版本 -->
+  <description>Shared-memory IPC for EdgeRover (FrameRing)</description> <!-- 功能包功能描述 -->
+
+  <maintainer email="lyfan@todo.todo">lyfan</maintainer> <!-- 维护者及邮箱 -->
+  <license>Apache-2.0</license> <!-- 开源许可证 -->
+
+  <buildtool_depend>ament_cmake</buildtool_depend> <!-- 指定使用 ament_cmake 作为构建工具 -->
+
+  <export>
+    <build_type>ament_cmake</build_type> <!-- 声明该功能包采用 CMake 构建类型 -->
+  </export>
+
+</package>

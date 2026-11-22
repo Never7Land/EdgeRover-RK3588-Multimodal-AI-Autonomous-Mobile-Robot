@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>edgerover_vlm</name>
+  <version>0.1.0</version>
+  <description>Qwen3-VL 2B inference on frames from FrameRing</description>
+  <maintainer email="lyfan@todo.todo">lyfan</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>edgerover_ipc</depend>
+  <depend>libopencv-dev</depend>
+  <depend>libzmq3-dev</depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>
