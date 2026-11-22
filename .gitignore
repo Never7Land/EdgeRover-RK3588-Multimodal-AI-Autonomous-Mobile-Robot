@@ -9,4 +9,5 @@ maps/*.posegraph
 .vscode/
 __pycache__/
 *.pyc
+# 忽略 Claude 配置文件
 CLAUDE.md
